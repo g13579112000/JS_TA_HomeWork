@@ -1,0 +1,160 @@
+[
+    {
+        "IPhone": {
+            "IPhone_SE": {
+                "Color": [
+                    "White",
+                    "Black",
+                    "Red"
+                ],
+                "Memory": {
+                    "64GB": "NT$13,900",
+                    "128GB": "NT$15,500",
+                    "256GB": "NT$19,000"
+                }
+            },
+            "IPhone_XR": {
+                "Color": [
+                    "White",
+                    "Black",
+                    "Blue",
+                    "Yellow",
+                    "Coral",
+                    "Red"
+                ],
+                "Memory": {
+                    "64GB": "NT$16,900",
+                    "128GB": "NT$18,500"
+                }
+            },
+            "IPhone11": {
+                "Color": [
+                    "White",
+                    "Black",
+                    "Green",
+                    "Yellow",
+                    "Purple",
+                    "Red"
+                ],
+                "Memory": {
+                    "64GB": "NT$19,900",
+                    "128GB": "NT$21,500",
+                    "256GB": "NT$25,000"
+                }
+            },
+            "IPhone12": {
+                "Color": [
+                    "White",
+                    "Black",
+                    "Blue",
+                    "Green",
+                    "Red"
+                ],
+                "Memory": {
+                    "64GB": "NT$23,900",
+                    "128GB": "NT$25,500",
+                    "256GB": "NT$29,000"
+                }
+            },
+            "IPhone12_Pro": {
+                "Color": [
+                    "Black",
+                    "Silver",
+                    "Gold",
+                    "Blue"
+                ],
+                "Memory": {
+                    "64GB": "NT$33,900",
+                    "128GB": "NT$37,400",
+                    "256GB": "NT$44,400"
+                }
+            }
+        }
+    },
+    {
+        "IPad": {
+            "IPad_mini": {
+                "Color": [
+                    "Gray",
+                    "Silver",
+                    "Gold"
+                ],
+                "Memory": {
+                    "64GB": "NT$12,300",
+                    "256GB": "NT$17,200"
+                }
+            },
+            "IPad": {
+                "Color": [
+                    "Gray",
+                    "Silver",
+                    "Gold"
+                ],
+                "Memory": {
+                    "32GB": "NT$9,900",
+                    "128GB": "NT$12,900"
+                }
+            },
+            "IPad_Air": {
+                "Color": [
+                    "Gray",
+                    "Silver",
+                    "Gold",
+                    "Green",
+                    "Blue"
+                ],
+                "Memory": {
+                    "64GB": "NT$17,400",
+                    "256GB": "NT$22,400"
+                }
+            },
+            "IPad_Pro": {
+                "Color": [
+                    "Gray",
+                    "Silver"
+                ],
+                "Memory": {
+                    "128GB": "NT$24,300",
+                    "256GB": "NT$27,800",
+                    "512GB": "NT$34,800",
+                    "1TB": "NT$41,800"
+                }
+            }
+        }
+    },
+    {
+        "Mac": {
+            "MacBook_Air": {
+                "Color": [
+                    "Gray",
+                    "Gold",
+                    "Silver"
+                ],
+                "Memory": {
+                    "256GB": "NT$27,800",
+                    "512GB": "NT$35,800"
+                }
+            },
+            "MacBook_Pro'13": {
+                "Color": [
+                    "Gray",
+                    "Silver"
+                ],
+                "Memory": {
+                    "256GB": "NT$36,800",
+                    "512GB": "NT$42,800"
+                }
+            },
+            "MacBook_Pro'16": {
+                "Color": [
+                    "Gray",
+                    "Silver"
+                ],
+                "Memory": {
+                    "512GB": "NT$71,400",
+                    "1TB": "NT$83,400"
+                }
+            }
+        }
+    }
+]
