@@ -11,6 +11,10 @@ level_Btn.addEventListener("click", getLevel)
 function getLevel() {
     let level = document.getElementById("Level")
     Level = parseInt(level.value) //遊戲難度
+    if(Level>11){
+        alert("是可以跑拉! 只是你的電腦可能會炸掉 輸入10以下的ㄅ~")
+        return;
+    }
     Save_Panel.innerHTML = "";
     GameStart(Level); //產生遊戲版面
     RandomBox();
