@@ -1,0 +1,53 @@
+.Nav_Btn {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.Nav_Btn>div {
+    margin: 0 20px;
+}
+
+.Level {
+    display: flex;
+    align-items: center;
+}
+
+.Level input {
+    margin: 0 10px;
+    width: 30px;
+}
+
+.Level label {
+    background-color: rgba(143, 134, 134, 0.795);
+    padding: 5px 10px;
+    box-shadow: 1px 3px 1px 1px #777;
+}
+
+
+.Panel {
+    width: 600px;
+    height: 600px;
+    border: 1px solid #777;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.Save_Panel{
+    display: none;
+}
+
+.Pic{
+    width: 200px;
+    height: 200px;
+    margin: 0 0 0 100px;
+}
+.Pic img{
+    width: 100%;
+}
+.box {
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+}
