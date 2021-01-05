@@ -10,8 +10,12 @@ let answer =[]
 level_Btn.addEventListener("click", getLevel)
 function getLevel() {
     let level = document.getElementById("Level")
+    if(!(parseInt(level.value)>1&&parseInt(level.value)<11)){
+        alert("請輸入2~10之間的難度")
+        return;
+    }
     Level = parseInt(level.value) //遊戲難度
-    if(Level>11){
+    if(Level>10){
         alert("是可以跑拉! 只是你的電腦可能會炸掉 輸入10以下的ㄅ~")
         return;
     }
