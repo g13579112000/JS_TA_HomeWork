@@ -105,7 +105,7 @@ function JudgeWin(){
 
 //遊戲開始隨機移動Box
 function RandomBox() {
-    for(let i = 0;i<100;i++){
+    for(let i = 0;i<1000;i++){
         let Num = Math.floor(Math.random() * 10)
     let TheControl = control.indexOf(last_Box.id)
     if (Num == 0 || Num == 1 || Num == 2) {
