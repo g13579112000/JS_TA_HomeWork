@@ -47,7 +47,6 @@
     width: 600px;
     height: 600px;
     border: 1px solid #777;
-    margin: auto;
     display: flex;
     flex-wrap: wrap;
 }
@@ -56,9 +55,9 @@
 }
 
 .Pic{
-    width: 200px;
-    height: 200px;
-    margin: 0 0 0 150px;
+    width: 300px;
+    height: 300px;
+    margin: 0 0 0 20px;
 }
 .Pic img{
     width: 100%;
@@ -68,4 +67,9 @@
     position: relative;
     border: 2px solid #fff;
     box-sizing: border-box;
+}
+
+.Game{
+    display: flex;
+    justify-content: center;
 }

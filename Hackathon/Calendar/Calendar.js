@@ -20,7 +20,11 @@ function getLevel() {
         alert("是可以跑拉! 只是你的電腦可能會炸掉 輸入10以下的ㄅ~")
         return;
     }
+
+    Step.value = 0;
+    Panel.innerHTML = "";
     Save_Panel.innerHTML = "";
+
     GameStart(Level); //產生遊戲版面
     RandomBox();
     level_Btn.removeEventListener("click", getLevel)
@@ -28,6 +32,8 @@ function getLevel() {
 
 function GameStart(Level) {
     createBox(Level); //提供每個方塊 div>img 圖片需定位好
+    control = [];
+    answer = [];
     getControl(Level); //控制每個項目進入矩陣
 }
 
@@ -109,7 +115,7 @@ function ChangeItem(item, controller, operator) {
 
 //物件移動動畫 (所選物件,控制項,移動方向)
 function ChangeAnimation(item, direction) {
-    let ClickItem = document
+    // let animation = element.animate(keyframes, options);
     switch (direction) {
         case "top":
             break;
@@ -125,8 +131,9 @@ function ChangeAnimation(item, direction) {
 //判斷勝利
 function JudgeWin() {
     if (answer.toString() == control.toString()) {
-        setTimeout((() => alert("You Win!")), 200)
+        setTimeout((() => alert(`You Win!     Step:${Step.value}`)), 200)
         Panel.innerHTML = `<div><img src="https://picsum.photos/600/600/?random=1"></div>`
+        level_Btn.addEventListener("click", getLevel)
         return true;
     }
     return false;
