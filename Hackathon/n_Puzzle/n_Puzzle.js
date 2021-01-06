@@ -4,9 +4,31 @@ let Panel = document.querySelector(".Panel")
 let Panel_size = Panel.scrollWidth
 let level_Btn = document.getElementById("Level_Btn")
 var control = []; //控制物件矩陣
-let Level = 0;
-let answer = []
-let Step = document.getElementById("Step");
+let Level = 0; //遊戲難度
+let answer = [] //完成對照用矩陣
+let Step = document.getElementById("Step"); //計算操作次數
+let url = "https://picsum.photos/600/600/?random=1"
+let Pic_Self = document.querySelector(".OnloadPic>input")
+let fix = document.getElementById("Auto_Finish");
+
+fix.addEventListener("click",fixPanel)
+function fixPanel(){
+    control = answer;
+    Update()
+}
+
+Pic_Self.addEventListener("change",SelfPic_onload)
+function SelfPic_onload(){
+    url = new FileReader()
+    url.readAsDataURL(Pic_Self.value)
+}
+
+window.onload = ()=>{
+    let img = document.createElement("img")
+    let CorrectPic = document.querySelector(".Pic")
+    img.src = url;
+    CorrectPic.appendChild(img);
+}
 
 level_Btn.addEventListener("click", getLevel)
 function getLevel() {
@@ -48,7 +70,7 @@ function createBox(Level) {
             box.className = `box`
             box.id = `box${item}`
             box.setAttribute("style", `width:${box_Size}%;height:${box_Size}%;`);
-            img.src = `https://picsum.photos/600/600/?random=1`
+            img.src = url;
             img.setAttribute("style", `position: absolute; top: ${-(i * img_Size)}px;left: ${-(j * img_Size)}px;z-index:-1;`);
             box.appendChild(img)
             Save_Panel.appendChild(box)
@@ -132,7 +154,7 @@ function ChangeAnimation(item, direction) {
 function JudgeWin() {
     if (answer.toString() == control.toString()) {
         setTimeout((() => alert(`You Win!     Step:${Step.value}`)), 200)
-        Panel.innerHTML = `<div><img src="https://picsum.photos/600/600/?random=1"></div>`
+        Panel.innerHTML = `<div><img src=${url}></div>`
         level_Btn.addEventListener("click", getLevel)
         return true;
     }

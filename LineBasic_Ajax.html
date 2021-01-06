@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <style>
+        #spinner1, #spinner2, #spinner3, #spinner4{
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.664);
+        }
+
+        #spinnerDemo {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 0, 0, .4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #spinner1 > p, #spinner2 > p, #spinner3 > p, #spinner4 > p{
+            font-family: '微軟正黑體';
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            /* font-size: 24px; */
+        }
+
+        #spinnerDemo > p {
+            font-family: '微軟正黑體';
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 position-relative">
+                <canvas id="ChartDemo"></canvas>
+                <div id="spinnerDemo" class="position-absolute">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="display-4 rounded-lg">加載失敗</p>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-6 position-relative">
+                <canvas id="lineChart_one"></canvas>
+                <div id="spinner1" class="position-absolute">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="display-4 rounded-lg">加載失敗</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <canvas id="lineChart_two"></canvas>
+                <div id="spinner2" class="position-absolute">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="display-4 rounded-lg">加載失敗</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <canvas id="lineChart_three"></canvas>
+                <div id="spinner3" class="position-absolute">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="display-4 rounded-lg">加載失敗</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <canvas id="lineChart_four"></canvas>
+                <div id="spinner4" class="position-absolute">
+                    <div class="spinner-grow" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="display-4 rounded-lg">加載失敗</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        //圖表
+        //new 圖表 -> Ajax要資料 -> 更新圖表
+
+        //Ajax資料 -> new 圖表
+        var chartDemo = document.getElementById('ChartDemo')
+
+        var Demo = new Chart(chartDemo, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '',
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgba(255,165,0)',
+                    borderColor: 'rgba(255,165,0)',
+                    pointStyle: 'circle',
+                    pointBackgroundColor: 'rgba(0,255,0)',
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 26,
+                    text: '1-6月氣溫平均值'
+                },
+                tooltips: {
+                    mode: 'point',
+                    intersect: true,
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'black',
+                    }
+                }
+            }
+        });
+
+        //var spinnerDemo = document.getElementById('spinnerDemo');
+
+        $.ajax({
+            type: "Get",
+            url: "https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.jsonsadfsad",
+            dataType: "JSON",
+            success: function(response) {
+                setInterval(function() {
+                    console.log(response)
+                    Demo.data.labels = response.Label;
+                    Demo.data.datasets[0].label = response.City;
+                    Demo.data.datasets[0].data = response.Data;
+                    Demo.update()
+
+                    //轉圈圈動畫取消
+                    document.getElementById('spinnerDemo').classList.add('d-none')
+                    //$(spinner3).children('p').css('display', 'block');
+                    //document.querySelector('#spinnerDemo > p').setAttribute('style', "display: block")
+                }, 2000)
+            },
+            error: function() {
+                //轉圈圈動畫取消
+                setInterval(function() {
+                    //document.getElementById('spinnerDemo').classList.add('d-none')
+                    $(document.querySelector('#spinnerDemo')).children('div').css('display', 'none');
+                    $(document.querySelector('#spinnerDemo')).children('p').css('display', 'block');
+                }, 2000)
+            }
+        })
+
+
+
+
+
+        var ctx_1 = document.getElementById("lineChart_one");
+        var ctx_2 = document.getElementById("lineChart_two");
+        var ctx_3 = document.getElementById("lineChart_three");
+        var ctx_4 = document.getElementById("lineChart_four");
+
+        var spinner1 = document.getElementById('spinner1');
+        var spinner2 = document.getElementById('spinner2');
+        var spinner3 = document.getElementById('spinner3');
+        var spinner4 = document.getElementById('spinner4');
+        
+
+        //Get 圖表1 資料
+        $.ajax({
+            type: "Get",
+            url: "https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.json",
+            dataType: 'JSON',
+            success: function (response) {
+
+                setInterval(function () {
+                    //$(ctx_1).parent().closest('div').addClass('col-6');
+                    $(spinner1).css('display','none');
+                    chart1.data.labels = response.Label;
+                    chart1.data.datasets[0].label = response.City;
+                    chart1.data.datasets[0].data = response.Data;
+                    chart1.update();
+                }, 3000);
+                //console.log(response);
+            }
+        });
+        //Get 圖表2 資料
+        $.ajax({
+            type: "Get",
+            url: "https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.json",
+            dataType: 'JSON',
+            success: function (response) {
+                setInterval(function () {
+                    //$(ctx_2).parent().closest('div').addClass('col-6');
+                    $(spinner2).css('display', 'none');
+                    chart2.data.labels = response.Label;
+                    chart2.data.datasets[0].label = response.City;
+                    chart2.data.datasets[0].data = response.Data;
+                    chart2.update();
+                }, 7500);
+                //console.log(response);
+            }
+        });
+        //Get 圖表3 資料
+        $.ajax({
+            type: "Get",
+            url: "https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.jsonError",
+            dataType: 'JSON',
+            success: function (response) {
+                setInterval(function () {
+                    //$(ctx_3).parent().closest('div').addClass('col-6');
+                    $(spinner3).css('display', 'none');
+                    chart3.data.labels = response.Label;
+                    chart3.data.datasets[0].label = response.City;
+                    chart3.data.datasets[0].data = response.Data;
+                    chart3.update();
+                }, 1000);
+                //console.log(response);
+            },
+            error: function()
+            {
+                setInterval(function() {
+                    $(spinner3).children('p').css('display', 'block');
+                    $(spinner3).children('div').css('display', 'none')
+                }, 3000);
+            }
+        });
+        //Get 圖表4 資料
+        $.ajax({
+            type: "Get",
+            url: "https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.jsonError",
+            dataType: 'JSON',
+            success: function (response) {
+                //$(ctx_4).parent().closest('div').addClass('col-6');
+                $(spinner4).css('display', 'none');
+                chart4.data.labels = response.Label;
+                chart4.data.datasets[0].label = response.City;
+                chart4.data.datasets[0].data = response.Data;
+                chart4.update();
+                //console.log(response);
+            }
+        });
+
+
+
+        var chart1 = new Chart(ctx_1, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '',
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgba(255,165,0)',
+                    borderColor: 'rgba(255,165,0)',
+                    pointStyle: 'circle',
+                    pointBackgroundColor: 'rgba(0,255,0)',
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 26,
+                    text: '1-6月氣溫平均值'
+                },
+                tooltips: {
+                    mode: 'point',
+                    intersect: true,
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'black',
+                    }
+                }
+            }
+        });
+
+        var chart2 = new Chart(ctx_2, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '',
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgba(255,165,0)',
+                    borderColor: 'rgba(255,255,0)',
+                    pointStyle: 'circle',
+                    pointBackgroundColor: 'rgba(0,255,0)',
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 26,
+                    text: '1-6月氣溫平均值'
+                },
+                tooltips: {
+                    mode: 'point',
+                    intersect: true,
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'black',
+                    }
+                }
+            }
+        });
+
+        var chart3 = new Chart(ctx_3, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '',
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgba(255,165,0)',
+                    borderColor: 'rgba(255,0,0)',
+                    pointStyle: 'circle',
+                    pointBackgroundColor: 'rgba(0,255,0)',
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 26,
+                    text: '1-6月氣溫平均值'
+                },
+                tooltips: {
+                    mode: 'point',
+                    intersect: true,
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'black',
+                    }
+                }
+            }
+        });
+
+        var chart4 = new Chart(ctx_4, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '',
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgba(255,165,0)',
+                    borderColor: 'rgba(255,0,255)',
+                    pointStyle: 'circle',
+                    pointBackgroundColor: 'rgba(0,255,0)',
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 26,
+                    text: '1-6月氣溫平均值'
+                },
+                tooltips: {
+                    mode: 'point',
+                    intersect: true,
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'black',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
