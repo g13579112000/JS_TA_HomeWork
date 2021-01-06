@@ -5,24 +5,25 @@ let Panel_size = Panel.scrollWidth
 let level_Btn = document.getElementById("Level_Btn")
 var control = []; //控制物件矩陣
 let Level = 0;
-let answer =[]
+let answer = []
+let Step = document.getElementById("Step");
 
 level_Btn.addEventListener("click", getLevel)
 function getLevel() {
     let level = document.getElementById("Level")
-    if(!(parseInt(level.value)>1&&parseInt(level.value)<11)){
+    if (!(parseInt(level.value) > 1 && parseInt(level.value) < 11)) {
         alert("請輸入2~10之間的難度")
         return;
     }
     Level = parseInt(level.value) //遊戲難度
-    if(Level>10){
+    if (Level > 10) {
         alert("是可以跑拉! 只是你的電腦可能會炸掉 輸入10以下的ㄅ~")
         return;
     }
     Save_Panel.innerHTML = "";
     GameStart(Level); //產生遊戲版面
     RandomBox();
-    level_Btn.removeEventListener("click",getLevel)
+    level_Btn.removeEventListener("click", getLevel)
 }
 
 function GameStart(Level) {
@@ -77,73 +78,101 @@ function itemMove() {
     let TheOne = control.indexOf(this.id)
     let TheControl = control.indexOf(last_Box.id)
 
+    //移動判斷 右 左 下 上
     if (control[TheOne + 1] == control[TheControl] && TheControl % Level != 0) {
-        ChangeItem(TheOne, TheControl);
+        ChangeItem(TheOne, TheControl, "player");
+        ChangeAnimation(TheOne, "right");
     }
     else if (control[TheOne - 1] == control[TheControl] && TheOne % Level != 0) {
-        ChangeItem(TheOne, TheControl);
+        ChangeItem(TheOne, TheControl, "player");
+        ChangeAnimation(TheOne, "left");
     }
-    else if (control[TheOne + Level] == control[TheControl] ||
-        control[TheOne - Level] == control[TheControl]) {
-        ChangeItem(TheOne, TheControl);
+    else if (control[TheOne + Level] == control[TheControl]) {
+        ChangeItem(TheOne, TheControl, "player");
+        ChangeAnimation(TheOne, "bottom");
+    }
+    else if (control[TheOne - Level] == control[TheControl]) {
+        ChangeItem(TheOne, TheControl, "player");
+        ChangeAnimation(TheOne, "top");
     }
     Update();
     JudgeWin();
 }
 
-//移動物件
-function ChangeItem(TheOne, TheControl) {
-    let save;
-    save = control[TheOne];
-    control[TheOne] = control[TheControl]
-    control[TheControl] = save;
+//移動物件 (所選物件,控制項,事件觸發者)
+function ChangeItem(item, controller, operator) {
+    [control[item], control[controller]] = [control[controller], control[item]]
+    if (operator == "player") {
+        Step.value = parseInt(Step.value) + 1;
+    }
+}
+
+//物件移動動畫 (所選物件,控制項,移動方向)
+function ChangeAnimation(item, direction) {
+    let ClickItem = document
+    switch (direction) {
+        case "top":
+            break;
+        case "bottom":
+            break;
+        case "left":
+            break;
+        case "right":
+            break;
+    }
 }
 
 //判斷勝利
-function JudgeWin(){
-    if(answer.toString() == control.toString()){
-        setTimeout((()=>alert("You Win!")),200)
-        
+function JudgeWin() {
+    if (answer.toString() == control.toString()) {
+        setTimeout((() => alert("You Win!")), 200)
+        Panel.innerHTML = `<div><img src="https://picsum.photos/600/600/?random=1"></div>`
+        return true;
     }
+    return false;
 }
+
 
 //遊戲開始隨機移動Box
 function RandomBox() {
-    for(let i = 0;i<1000;i++){
-        let Num = Math.floor(Math.random() * 10)
-    let TheControl = control.indexOf(last_Box.id)
-    if (Num == 0 || Num == 1 || Num == 2) {
-        randomChange(document.getElementById(control[TheControl + 1]))
-    }
-    else if (Num == 3 || Num == 4 || Num == 5) {
-        randomChange(document.getElementById(control[TheControl - 1]))
-    }
-    else if (Num == 6 || Num == 7) {
-        randomChange(document.getElementById(control[TheControl + Level]))
-    }
-    else if (Num == 8 || Num == 9) {
-        randomChange(document.getElementById(control[TheControl - Level]))
-    }
-    }
-    
+    do {
+        for (let i = 0; i < 1000; i++) {
+            let Num = Math.floor(Math.random() * 10)
+            let TheControl = control.indexOf(last_Box.id)
+            if (Num == 0 || Num == 1 || Num == 2) {
+                randomChange(document.getElementById(control[TheControl + 1]))
+            }
+            else if (Num == 3 || Num == 4 || Num == 5) {
+                randomChange(document.getElementById(control[TheControl - 1]))
+            }
+            else if (Num == 6 || Num == 7) {
+                randomChange(document.getElementById(control[TheControl + Level]))
+            }
+            else if (Num == 8 || Num == 9) {
+                randomChange(document.getElementById(control[TheControl - Level]))
+            }
+        }
+    } while (JudgeWin() == true)
+
     Update()
 }
 
 function randomChange(item) {
-    if(!item){
+    if (!item) {
         return;
     }
     let TheOne = control.indexOf(item.id)
     let TheControl = control.indexOf(last_Box.id)
 
     if (control[TheOne + 1] == control[TheControl] && TheControl % Level != 0) {
-        ChangeItem(TheOne, TheControl);
+        ChangeItem(TheOne, TheControl, "cpu");
     }
     else if (control[TheOne - 1] == control[TheControl] && TheOne % Level != 0) {
-        ChangeItem(TheOne, TheControl);
+        ChangeItem(TheOne, TheControl, "cpu");
     }
     else if (control[TheOne + Level] == control[TheControl] ||
         control[TheOne - Level] == control[TheControl]) {
-        ChangeItem(TheOne, TheControl);
+        ChangeItem(TheOne, TheControl, "cpu");
     }
+
 }

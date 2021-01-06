@@ -17,6 +17,24 @@
     margin: 0 10px;
     width: 30px;
 }
+.nowStep{
+    display: flex;
+    align-items: center;
+}
+.nowStep p{
+    font-size: 14px;
+    font-weight: 300;
+}
+.nowStep input{
+    width: 35px;
+    text-align: center;
+    border: none;
+    font-size: 20px;
+    color: #fa0;
+}
+.nowStep input:focus{
+    outline: none;
+}
 
 .Level label {
     background-color: rgba(143, 134, 134, 0.795);
