@@ -13,33 +13,36 @@ namespace n_Puzzle_JSON
         static void Main(string[] args)
         {
             StartLog();
-            long num = 0;
-            for (int i = 1; i < 1000000000; i++)
-            {
-                num += 1;
-            }
+            
+
+
+
+
+
+
+
             StopLog();
             Console.ReadLine();
         }
 
-        //[Conditional("DEBUG")]
-        //static void StartLog()
-        //{
-        //    _sw.Reset();
-        //    _sw = Stopwatch.StartNew();
-        //}
-        //[Conditional("DEBUG")]
-        //static void StopLog()
-        //{
-        //    _sw.Stop();
-        //    TimeSpan el = _sw.Elapsed;
-        //    Console.WriteLine("花費 {0} ", el);
+        [Conditional("DEBUG")]
+        static void StartLog()
+        {
+            _sw.Reset();
+            _sw = Stopwatch.StartNew();
+        }
+        [Conditional("DEBUG")]
+        static void StopLog()
+        {
+            _sw.Stop();
+            TimeSpan el = _sw.Elapsed;
+            Console.WriteLine("花費 {0} ", el);
 
-        //    long ms = _sw.ElapsedMilliseconds;
-        //    Console.WriteLine("花費 {0} 毫秒", ms);
+            long ms = _sw.ElapsedMilliseconds;
+            Console.WriteLine("花費 {0} 毫秒", ms);
 
-        //    long tk = _sw.ElapsedTicks;
-        //    Console.WriteLine("花費 {0} ticks", tk);
-        //}
+            long tk = _sw.ElapsedTicks;
+            Console.WriteLine("花費 {0} ticks", tk);
+        }
     }
 }
