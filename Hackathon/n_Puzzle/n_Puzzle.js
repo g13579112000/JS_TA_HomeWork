@@ -13,6 +13,13 @@ let url = "https://picsum.photos/600/600/?random=1"
 // let Pic_Self = document.querySelector(".OnloadPic>input")
 let fix = document.getElementById("Auto_Finish");
 
+//上傳圖片
+let upload = document.getElementById("upload_img").addEventListener("change",function(e){
+    console.log(e.target.files[0].size)
+    url = URL.createObjectURL(e.target.files[0]);
+    ShowPic()
+})
+
 
 //移置完成狀態
 function fixPanel() {
@@ -28,9 +35,10 @@ function fixPanel() {
 //     url.readAsDataURL(Pic_Self.value)
 // }
 
-window.onload = () => {
+function ShowPic(){
     let img = document.createElement("img")
     let CorrectPic = document.querySelector(".Pic")
+    CorrectPic.innerHTML = ""
     img.src = url;
     CorrectPic.appendChild(img);
 }
@@ -54,7 +62,7 @@ function getLevel() {
     Step.value = 0;
     Panel.innerHTML = "";
     Save_Panel.innerHTML = "";
-
+    ShowPic()
     GameStart(Level);
     RandomBox();
     fix.addEventListener("click", fixPanel)
