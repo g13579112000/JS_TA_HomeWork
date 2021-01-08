@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            background-color: rgba(255, 0, 0, .3);
+            display: flex;
+            position: relative;
+
+        }
+
+        .block {
+            width: 200px;
+            height: 200px;
+            background-color: #af0;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="b1" style="top:0;left:0;" class="block"></div>
+    </div>
+
+    <script>
+        document.getElementById("b1").addEventListener("click", async function () {
+            let s = 200;
+            let v = 10;
+            let now = parseInt(document.getElementById("b1").style.left);
+            for (let i = 0; i <= s; i += v) {
+                await sleep(100);
+                document.getElementById("b1").style.left = (i+now) + 'px';
+            }
+        })
+
+        async function sleep(ms = 0) {
+            return new Promise(r => setTimeout(r, ms));
+        }
+    </script>
+</body>
+
+</html>

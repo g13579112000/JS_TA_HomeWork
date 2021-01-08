@@ -44,6 +44,7 @@
 
 
 .Panel {
+    position: relative;
     width: 600px;
     height: 600px;
     border: 1px solid #777;
@@ -64,9 +65,11 @@
 }
 .box {
     overflow: hidden;
-    position: relative;
+    position: absolute;
     border: 2px solid #fff;
     box-sizing: border-box;
+    top: 0;
+    left: 0;
 }
 
 .Game{

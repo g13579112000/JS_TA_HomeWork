@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        #spinner1,
+        #spinner2,
+        #spinner3,
+        #spinner4 {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.664);
+        }
+
+        #spinnerDemo {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 0, 0, .4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #spinner1>p,
+        #spinner2>p,
+        #spinner3>p,
+        #spinner4>p {
+            font-family: '微軟正黑體';
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            /* font-size: 24px; */
+        }
+
+        #spinnerDemo>p {
+            font-family: '微軟正黑體';
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 position-relative">
+                <canvas id="lineChart_one"></canvas>
+                <div id="spinner1" class="position-absolute">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="display-4 rounded-lg">加載失敗</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var ctx_1 = document.getElementById("lineChart_one")
+        var spinner1 = document.getElementById("spinner1")
+
+        var chart1 = new Chart(ctx_1, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '',
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgba(255,165,0)',
+                    borderColor: 'rgba(255,165,0)',
+                    pointStyle: 'circle',
+                    pointBackgroundColor: 'rgba(0,255,0)',
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 26,
+                    text: '1-6月氣溫平均值'
+                },
+                tooltips: {
+                    mode: 'point',
+                    intersect: true,
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'black',
+                    }
+                }
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.json",
+            dataType: "JSON",
+            success: function (response) {
+                setInterval(function () {
+                    $(spinner1).css("display", "none");
+                    chart1.data.labels = response.Label;
+                    chart1.data.datasets[0].label = response.City;
+                    chart1.data.datasets[0].data = response.Data;
+                    chart1.update();
+                }, 3000)
+
+            },
+            error: function () {
+                setInterval(function () {
+                    $(spinner1).children("p").css("display", "block");
+                    $(spinner1).children("div").css("display", "none");
+                }, 3000)
+
+            }
+        })
+
+    </script>
+
+
+</body>
+
+</html>

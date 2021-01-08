@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var dateA = new Date();
+        console.log(dateA);
+
+        var dateB = new Date(2021,1,8);
+        console.log(dateB);
+
+        //取得年
+        var year = dateA.getFullYear(); //2021;
+        //取得月份
+        var month = dateA.getMonth(); //月份是從0開始
+        //取得日期
+        var date = dateA.getDate(); 
+        //取得星期
+        var day = dateA.getDay(); //禮拜天是0
+
+        console.log(year)
+        console.log(month)
+        console.log(date)
+        console.log(day)
+
+        // 取得月有幾天
+        var daysOfMonth = new Date(year, month+2 ,0).getDate();
+        console.log(daysOfMonth);
+    </script>
+</body>
+</html>

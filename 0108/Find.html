@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        data.map(x => x.Wives.map(y => { return { Name: y.Name, Husband: x.Name } })).reduce((a, b) => a.concat(b));
+
+        function GroudBy(data,Num) {
+            return data.find(x => x.Wives.ages >= Num),data.find(x => x.Wives.ages < Num)
+        }
+
+
+
+    </script>
+</body>
+
+</html>

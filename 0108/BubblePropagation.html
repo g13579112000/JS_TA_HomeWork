@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #Layer1{
+            width: 500px;
+            height: 500px;
+            background-color: #f00;
+        }
+        #Layer2{
+            width: 300px;
+            height: 300px;
+            background-color: #00f;
+        }
+        #Layer3{
+            width: 100px;
+            height: 100px;
+            background-color: #ff0
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="Layer1">
+        <div id="Layer2">
+            <div id="Layer3">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        layer1_Div = document.getElementById("Layer1");
+        layer2_Div = document.getElementById("Layer2");
+        layer3_Div = document.getElementById("Layer3");
+
+        layer1_Div.addEventListener("click",function(){
+            console.log("我是DIV1")
+        })
+        layer2_Div.addEventListener("click",function(){
+            console.log("我是DIV2")
+        })
+        layer3_Div.addEventListener("click",function(e){
+            console.log(e)
+            console.log("我是DIV3")
+            e.stopPropagation();
+        });
+    </script>
+</body>
+
+</html>

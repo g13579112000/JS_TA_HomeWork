@@ -1,0 +1,49 @@
+.Calendar{
+    padding: 10px;
+    box-sizing: border-box;
+}
+.header{
+    justify-content: space-around;
+    border: 1px solid #ccc;
+}
+.header input{
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+    border: 0px;
+}
+.header input:focus{
+    outline: none;
+}
+.header button{
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    width: 100px;
+}
+.header button:focus{
+    outline: none;
+}
+.nav{
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+.nav .Date{
+    width: 15%;
+    text-align: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+.days{
+    display: flex;
+    flex-wrap: wrap;
+}
+.day{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}

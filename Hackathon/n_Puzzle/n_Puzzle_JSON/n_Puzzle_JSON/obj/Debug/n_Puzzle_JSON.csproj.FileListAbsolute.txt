@@ -1,0 +1,7 @@
+C:\Projects\JS\TAHomeWork\Hackathon\n_Puzzle\n_Puzzle_JSON\n_Puzzle_JSON\bin\Debug\n_Puzzle_JSON.exe.config
+C:\Projects\JS\TAHomeWork\Hackathon\n_Puzzle\n_Puzzle_JSON\n_Puzzle_JSON\bin\Debug\n_Puzzle_JSON.exe
+C:\Projects\JS\TAHomeWork\Hackathon\n_Puzzle\n_Puzzle_JSON\n_Puzzle_JSON\bin\Debug\n_Puzzle_JSON.pdb
+C:\Projects\JS\TAHomeWork\Hackathon\n_Puzzle\n_Puzzle_JSON\n_Puzzle_JSON\obj\Debug\n_Puzzle_JSON.csprojAssemblyReference.cache
+C:\Projects\JS\TAHomeWork\Hackathon\n_Puzzle\n_Puzzle_JSON\n_Puzzle_JSON\obj\Debug\n_Puzzle_JSON.csproj.CoreCompileInputs.cache
+C:\Projects\JS\TAHomeWork\Hackathon\n_Puzzle\n_Puzzle_JSON\n_Puzzle_JSON\obj\Debug\n_Puzzle_JSON.exe
+C:\Projects\JS\TAHomeWork\Hackathon\n_Puzzle\n_Puzzle_JSON\n_Puzzle_JSON\obj\Debug\n_Puzzle_JSON.pdb
